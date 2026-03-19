@@ -173,7 +173,7 @@ CollaBridge-Backend/
 ## Screenshots
 
 
-### Login
+## Login
 ![Login](./screenshots/Login.png)
 
 ### Brand Dashboard
