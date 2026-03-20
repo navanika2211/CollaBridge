@@ -1,3 +1,4 @@
+import "./LoadingSpinner.css"
 import PropTypes from "prop-types";
 
 export default function LoadingSpinner({ text = "Loading..." }) {

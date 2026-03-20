@@ -1,3 +1,4 @@
+import "./PlatformBadge.css"
 import PropTypes from "prop-types";
 
 const platforms = {

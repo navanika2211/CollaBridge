@@ -1,3 +1,4 @@
+import "./Sidebar.css"
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 

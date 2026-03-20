@@ -1,3 +1,4 @@
+import "./ConfirmModal.css"
 import PropTypes from "prop-types";
 
 export default function ConfirmModal({

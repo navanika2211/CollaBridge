@@ -1,3 +1,4 @@
+import "./RegisterPage.css"
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { registerUser } from "../api/auth";

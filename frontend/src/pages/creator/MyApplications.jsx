@@ -1,3 +1,4 @@
+import "./MyApplications.css"
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { getApplications, updateApplication } from "../../api/applications";
