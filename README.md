@@ -19,7 +19,9 @@ CollaBridge lets brands and creators manage collaborations in one structured pla
 
 ## Live Demo
 
-Deployed at: https://your-deployment-url.vercel.app
+Deployed at: https://fascinating-bubblegum-34c967.netlify.app/
+collabridge-frontend
+ 
 
 - 🎥 **Demo Video:** https://youtu.be/your-video-link
 - 📊 **Slides:** https://docs.google.com/presentation/d/1n7OU8_K_ebRPRseiF6YvSlgdLviCESxPWuSxftvvdOo/edit?usp=sharing
