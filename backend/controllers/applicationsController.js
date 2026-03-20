@@ -56,7 +56,10 @@ export async function updateApplication(req, res, next) {
     if (Object.keys(updates).length === 1) {
       return res
         .status(400)
-        .json({ success: false, message: "No valid fields provided for update" });
+        .json({
+          success: false,
+          message: "No valid fields provided for update",
+        });
     }
     const db = getDB();
     const result = await db
@@ -64,7 +67,7 @@ export async function updateApplication(req, res, next) {
       .findOneAndUpdate(
         { _id: new ObjectId(req.params.id) },
         { $set: updates },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
     if (!result) {
       return res

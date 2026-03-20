@@ -5,11 +5,9 @@ import { getDB } from "../config/db.js";
 import * as User from "../models/User.js";
 
 function signToken(id, email, role) {
-  return jwt.sign(
-    { id: id.toString(), email, role },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
-  );
+  return jwt.sign({ id: id.toString(), email, role }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  });
 }
 
 // POST /api/auth/register
@@ -17,7 +15,9 @@ export async function register(req, res, next) {
   try {
     const errors = User.validate(req.body);
     if (errors.length) {
-      return res.status(400).json({ success: false, message: errors.join("; ") });
+      return res
+        .status(400)
+        .json({ success: false, message: errors.join("; ") });
     }
 
     const db = getDB();
@@ -25,7 +25,9 @@ export async function register(req, res, next) {
       email: req.body.email.trim().toLowerCase(),
     });
     if (existing) {
-      return res.status(400).json({ success: false, message: "Email already registered" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Email already registered" });
     }
 
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
@@ -48,7 +50,9 @@ export async function login(req, res, next) {
   try {
     const { email, password } = req.body;
     if (!email?.trim() || !password) {
-      return res.status(400).json({ success: false, message: "Email and password are required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Email and password are required" });
     }
 
     const db = getDB();
@@ -56,12 +60,16 @@ export async function login(req, res, next) {
       email: email.trim().toLowerCase(),
     });
     if (!user) {
-      return res.status(401).json({ success: false, message: "Invalid credentials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res.status(401).json({ success: false, message: "Invalid credentials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
     const token = signToken(user._id, user.email, user.role);

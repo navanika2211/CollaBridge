@@ -13,7 +13,11 @@ export async function getAllCollaborations(req, res, next) {
       .sort({ createdAt: -1 })
       .toArray();
 
-    res.json({ success: true, count: collaborations.length, data: collaborations });
+    res.json({
+      success: true,
+      count: collaborations.length,
+      data: collaborations,
+    });
   } catch (err) {
     next(err);
   }
@@ -23,7 +27,9 @@ export async function getAllCollaborations(req, res, next) {
 export async function getCollaborationById(req, res, next) {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ success: false, message: "Invalid collaboration ID" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid collaboration ID" });
     }
 
     const db = getDB();
@@ -32,7 +38,9 @@ export async function getCollaborationById(req, res, next) {
       .findOne({ _id: new ObjectId(req.params.id) });
 
     if (!collaboration) {
-      return res.status(404).json({ success: false, message: "Collaboration not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Collaboration not found" });
     }
 
     res.json({ success: true, data: collaboration });
@@ -46,14 +54,18 @@ export async function createCollaboration(req, res, next) {
   try {
     const errors = Collaboration.validate(req.body);
     if (errors.length) {
-      return res.status(400).json({ success: false, message: errors.join("; ") });
+      return res
+        .status(400)
+        .json({ success: false, message: errors.join("; ") });
     }
 
     const doc = Collaboration.createCollaborationDoc(req.body);
     const db = getDB();
     const result = await db.collection(Collaboration.COLLECTION).insertOne(doc);
 
-    res.status(201).json({ success: true, data: { _id: result.insertedId, ...doc } });
+    res
+      .status(201)
+      .json({ success: true, data: { _id: result.insertedId, ...doc } });
   } catch (err) {
     next(err);
   }
@@ -63,29 +75,42 @@ export async function createCollaboration(req, res, next) {
 export async function updateCollaboration(req, res, next) {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ success: false, message: "Invalid collaboration ID" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid collaboration ID" });
     }
 
     const errors = Collaboration.validate(req.body, true);
     if (errors.length) {
-      return res.status(400).json({ success: false, message: errors.join("; ") });
+      return res
+        .status(400)
+        .json({ success: false, message: errors.join("; ") });
     }
 
     const updates = Collaboration.buildUpdateDoc(req.body);
     if (Object.keys(updates).length === 1) {
       // only updatedAt was set — no actual fields provided
-      return res.status(400).json({ success: false, message: "No valid fields provided for update" });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "No valid fields provided for update",
+        });
     }
 
     const db = getDB();
-    const result = await db.collection(Collaboration.COLLECTION).findOneAndUpdate(
-      { _id: new ObjectId(req.params.id) },
-      { $set: updates },
-      { returnDocument: "after" }
-    );
+    const result = await db
+      .collection(Collaboration.COLLECTION)
+      .findOneAndUpdate(
+        { _id: new ObjectId(req.params.id) },
+        { $set: updates },
+        { returnDocument: "after" },
+      );
 
     if (!result) {
-      return res.status(404).json({ success: false, message: "Collaboration not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Collaboration not found" });
     }
 
     res.json({ success: true, data: result });
@@ -98,7 +123,9 @@ export async function updateCollaboration(req, res, next) {
 export async function deleteCollaboration(req, res, next) {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ success: false, message: "Invalid collaboration ID" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid collaboration ID" });
     }
 
     const db = getDB();
@@ -107,7 +134,9 @@ export async function deleteCollaboration(req, res, next) {
       .deleteOne({ _id: new ObjectId(req.params.id) });
 
     if (result.deletedCount === 0) {
-      return res.status(404).json({ success: false, message: "Collaboration not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Collaboration not found" });
     }
 
     res.json({ success: true, message: "Collaboration deleted successfully" });

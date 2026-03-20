@@ -25,42 +25,119 @@ const randBool = (p = 0.5) => Math.random() < p;
 
 function randDate(start, end) {
   return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    start.getTime() + Math.random() * (end.getTime() - start.getTime()),
   );
 }
 
 // ─── Reference data ──────────────────────────────────────────────────────────
 
 const PLATFORMS = [
-  "Instagram", "TikTok", "YouTube", "Twitter",
-  "Facebook", "Pinterest", "LinkedIn", "Snapchat",
+  "Instagram",
+  "TikTok",
+  "YouTube",
+  "Twitter",
+  "Facebook",
+  "Pinterest",
+  "LinkedIn",
+  "Snapchat",
 ];
 
 const BRANDS = [
-  "Nike", "Adidas", "Puma", "Gymshark", "Lululemon",
-  "Glossier", "Fenty Beauty", "NARS", "Charlotte Tilbury", "Rare Beauty",
-  "Zara", "H&M", "ASOS", "Urban Outfitters", "Reformation",
-  "Apple", "Samsung", "Sony", "Bose", "Beats",
-  "Red Bull", "Monster Energy", "GoPro", "DJI", "Insta360",
-  "Sephora", "Ulta Beauty", "MAC Cosmetics", "NYX", "e.l.f.",
-  "Spotify", "Skillshare", "NordVPN", "Squarespace", "Shopify",
-  "HelloFresh", "Factor Meals", "Magic Spoon", "Liquid IV", "AG1",
-  "Dyson", "Ninja", "KitchenAid", "Vitamix", "Instant Pot",
-  "Revolve", "PrettyLittleThing", "Fashion Nova", "Shein", "Nasty Gal",
+  "Nike",
+  "Adidas",
+  "Puma",
+  "Gymshark",
+  "Lululemon",
+  "Glossier",
+  "Fenty Beauty",
+  "NARS",
+  "Charlotte Tilbury",
+  "Rare Beauty",
+  "Zara",
+  "H&M",
+  "ASOS",
+  "Urban Outfitters",
+  "Reformation",
+  "Apple",
+  "Samsung",
+  "Sony",
+  "Bose",
+  "Beats",
+  "Red Bull",
+  "Monster Energy",
+  "GoPro",
+  "DJI",
+  "Insta360",
+  "Sephora",
+  "Ulta Beauty",
+  "MAC Cosmetics",
+  "NYX",
+  "e.l.f.",
+  "Spotify",
+  "Skillshare",
+  "NordVPN",
+  "Squarespace",
+  "Shopify",
+  "HelloFresh",
+  "Factor Meals",
+  "Magic Spoon",
+  "Liquid IV",
+  "AG1",
+  "Dyson",
+  "Ninja",
+  "KitchenAid",
+  "Vitamix",
+  "Instant Pot",
+  "Revolve",
+  "PrettyLittleThing",
+  "Fashion Nova",
+  "Shein",
+  "Nasty Gal",
 ];
 
 const CAMPAIGN_ADJECTIVES = [
-  "Summer", "Winter", "Spring", "Fall", "Holiday", "Limited Edition",
-  "Exclusive", "New Season", "Fresh", "Bold", "Iconic", "Next-Gen",
-  "Signature", "Heritage", "Premium", "Essential", "Ultimate", "Classic",
+  "Summer",
+  "Winter",
+  "Spring",
+  "Fall",
+  "Holiday",
+  "Limited Edition",
+  "Exclusive",
+  "New Season",
+  "Fresh",
+  "Bold",
+  "Iconic",
+  "Next-Gen",
+  "Signature",
+  "Heritage",
+  "Premium",
+  "Essential",
+  "Ultimate",
+  "Classic",
 ];
 
 const CAMPAIGN_TYPES = [
-  "Collection Drop", "Brand Launch", "Product Reveal", "Awareness Campaign",
-  "Influencer Series", "Collab Campaign", "Relaunch", "Anniversary Edition",
-  "Flash Sale", "Challenge", "Haul Series", "Unboxing Series", "Review Series",
-  "Tutorial Series", "Day-in-the-Life", "Behind the Scenes", "GRWM Series",
-  "Transformation Series", "Before & After", "Try-On Haul", "Duet Series",
+  "Collection Drop",
+  "Brand Launch",
+  "Product Reveal",
+  "Awareness Campaign",
+  "Influencer Series",
+  "Collab Campaign",
+  "Relaunch",
+  "Anniversary Edition",
+  "Flash Sale",
+  "Challenge",
+  "Haul Series",
+  "Unboxing Series",
+  "Review Series",
+  "Tutorial Series",
+  "Day-in-the-Life",
+  "Behind the Scenes",
+  "GRWM Series",
+  "Transformation Series",
+  "Before & After",
+  "Try-On Haul",
+  "Duet Series",
 ];
 
 const DESCRIPTION_TEMPLATES = [
@@ -100,41 +177,162 @@ const INTERNAL_NOTES_TEMPLATES = [
   "Micro-influencer focus: 50k–250k followers preferred.",
   "Campaign tied to product launch. Strict embargo on all content.",
   "Retainer opportunity for top performers. Mention in outreach.",
-  null, null, null,
+  null,
+  null,
+  null,
 ];
 
-const CAMPAIGN_STATUSES = ["open", "open", "open", "in_review", "in_review", "completed"];
+const CAMPAIGN_STATUSES = [
+  "open",
+  "open",
+  "open",
+  "in_review",
+  "in_review",
+  "completed",
+];
 
 const CREATOR_FIRST = [
-  "Emma", "Luca", "Mia", "Kai", "Zoe", "Noah", "Ava", "Ethan",
-  "Sofia", "Aiden", "Luna", "Jayden", "Chloe", "Mason", "Lily",
-  "Logan", "Ella", "Lucas", "Aria", "Jackson", "Scarlett", "Olivia",
-  "Amara", "Theo", "Isla", "Felix", "Nora", "Mateo", "Layla", "Omar",
-  "Freya", "Caleb", "Aurora", "Ezra", "Violet", "Remy", "Hazel",
-  "Jax", "Ivy", "Silas", "Sage", "Finn", "Rio", "Blake", "Sasha",
-  "Drew", "Quinn", "Rowan", "Piper", "Skylar", "Avery", "Harper",
-  "Indigo", "Juno", "Kade", "Lexi", "Marco", "Nadia", "Oscar",
-  "Petra", "Rafe", "Stella", "Tatum", "Uma", "Vega", "Wren",
+  "Emma",
+  "Luca",
+  "Mia",
+  "Kai",
+  "Zoe",
+  "Noah",
+  "Ava",
+  "Ethan",
+  "Sofia",
+  "Aiden",
+  "Luna",
+  "Jayden",
+  "Chloe",
+  "Mason",
+  "Lily",
+  "Logan",
+  "Ella",
+  "Lucas",
+  "Aria",
+  "Jackson",
+  "Scarlett",
+  "Olivia",
+  "Amara",
+  "Theo",
+  "Isla",
+  "Felix",
+  "Nora",
+  "Mateo",
+  "Layla",
+  "Omar",
+  "Freya",
+  "Caleb",
+  "Aurora",
+  "Ezra",
+  "Violet",
+  "Remy",
+  "Hazel",
+  "Jax",
+  "Ivy",
+  "Silas",
+  "Sage",
+  "Finn",
+  "Rio",
+  "Blake",
+  "Sasha",
+  "Drew",
+  "Quinn",
+  "Rowan",
+  "Piper",
+  "Skylar",
+  "Avery",
+  "Harper",
+  "Indigo",
+  "Juno",
+  "Kade",
+  "Lexi",
+  "Marco",
+  "Nadia",
+  "Oscar",
+  "Petra",
+  "Rafe",
+  "Stella",
+  "Tatum",
+  "Uma",
+  "Vega",
+  "Wren",
 ];
 
 const CREATOR_LAST = [
-  "Chen", "Rossi", "Tanaka", "Williams", "Kim", "Patel", "Garcia",
-  "Martin", "Brown", "Davis", "Wilson", "Moore", "Taylor", "Anderson",
-  "Jackson", "White", "Harris", "Thompson", "Clark", "Lewis",
-  "Robinson", "Walker", "Hall", "Allen", "Young", "Hernandez",
-  "King", "Wright", "Lopez", "Hill", "Scott", "Green", "Adams",
-  "Baker", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner",
-  "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins",
-  "Stewart", "Sanchez", "Morris", "Rogers", "Reed", "Cook", "Morgan",
+  "Chen",
+  "Rossi",
+  "Tanaka",
+  "Williams",
+  "Kim",
+  "Patel",
+  "Garcia",
+  "Martin",
+  "Brown",
+  "Davis",
+  "Wilson",
+  "Moore",
+  "Taylor",
+  "Anderson",
+  "Jackson",
+  "White",
+  "Harris",
+  "Thompson",
+  "Clark",
+  "Lewis",
+  "Robinson",
+  "Walker",
+  "Hall",
+  "Allen",
+  "Young",
+  "Hernandez",
+  "King",
+  "Wright",
+  "Lopez",
+  "Hill",
+  "Scott",
+  "Green",
+  "Adams",
+  "Baker",
+  "Nelson",
+  "Carter",
+  "Mitchell",
+  "Perez",
+  "Roberts",
+  "Turner",
+  "Phillips",
+  "Campbell",
+  "Parker",
+  "Evans",
+  "Edwards",
+  "Collins",
+  "Stewart",
+  "Sanchez",
+  "Morris",
+  "Rogers",
+  "Reed",
+  "Cook",
+  "Morgan",
 ];
 
-const COLLAB_STATUSES = ["draft", "draft", "revision_requested", "final", "final"];
+const COLLAB_STATUSES = [
+  "draft",
+  "draft",
+  "revision_requested",
+  "final",
+  "final",
+];
 
 const PERSONAL_NOTES_TEMPLATES = [
-  (brand) => `Initial briefing done with ${brand}. Waiting on product shipment before filming.`,
-  (brand) => `${brand} approved first draft. Minor edits requested on the hook. Re-cutting now.`,
-  (brand) => `All content submitted to ${brand}. Awaiting final sign-off. Invoice sent.`,
-  (brand) => `${brand} loved the concept. Going ahead with full production this week.`,
+  (brand) =>
+    `Initial briefing done with ${brand}. Waiting on product shipment before filming.`,
+  (brand) =>
+    `${brand} approved first draft. Minor edits requested on the hook. Re-cutting now.`,
+  (brand) =>
+    `All content submitted to ${brand}. Awaiting final sign-off. Invoice sent.`,
+  (brand) =>
+    `${brand} loved the concept. Going ahead with full production this week.`,
   () => "Shoot scheduled. Location confirmed. Props sourced.",
   () => "First draft done. Sending to brand tomorrow for review.",
   () => "Revision round 2 in progress. Brand wants a warmer colour grade.",
@@ -153,7 +351,12 @@ const SUBMISSION_LINK_BASES = [
 ];
 
 const APP_STATUSES = [
-  "pending", "pending", "under review", "revision requested", "approved", "rejected",
+  "pending",
+  "pending",
+  "under review",
+  "revision requested",
+  "approved",
+  "rejected",
 ];
 
 const APP_MESSAGES = [
@@ -376,7 +579,9 @@ async function seed() {
     db.collection("creatorCollaborations").deleteMany({}),
     db.collection("applications").deleteMany({}),
   ]);
-  console.log("✓ Cleared: users, brandCampaigns, creatorCollaborations, applications");
+  console.log(
+    "✓ Cleared: users, brandCampaigns, creatorCollaborations, applications",
+  );
 
   if (WIPE_ONLY) {
     console.log("Wipe-only mode — skipping insert.");
@@ -430,14 +635,18 @@ async function seed() {
   }));
 
   console.log(
-    `✓ Inserted ${campaignDocs.length + demoCampaignDocs.length} campaigns (${demoCampaignDocs.length} demo brand)`
+    `✓ Inserted ${campaignDocs.length + demoCampaignDocs.length} campaigns (${demoCampaignDocs.length} demo brand)`,
   );
 
   // ── Collaborations (100 random + 500 demo creator) ───────────────────────────
   const collabDocs = generateCollaborations(100);
   const demoCollabDocs = generateDemoCreatorCollabs(500);
-  await db.collection("creatorCollaborations").insertMany([...collabDocs, ...demoCollabDocs]);
-  console.log(`✓ Inserted ${collabDocs.length + demoCollabDocs.length} collaborations (${demoCollabDocs.length} demo creator)`);
+  await db
+    .collection("creatorCollaborations")
+    .insertMany([...collabDocs, ...demoCollabDocs]);
+  console.log(
+    `✓ Inserted ${collabDocs.length + demoCollabDocs.length} collaborations (${demoCollabDocs.length} demo creator)`,
+  );
 
   // ── Applications (200) ──────────────────────────────────────────────────────
   const allCampaigns = [...campaignsWithIds, ...demoCampaignsWithIds];
@@ -446,7 +655,12 @@ async function seed() {
   console.log(`✓ Inserted ${appDocs.length} applications`);
 
   const total =
-    2 + campaignDocs.length + demoCampaignDocs.length + collabDocs.length + demoCollabDocs.length + appDocs.length;
+    2 +
+    campaignDocs.length +
+    demoCampaignDocs.length +
+    collabDocs.length +
+    demoCollabDocs.length +
+    appDocs.length;
   console.log(`\n✓ Total documents inserted: ${total}`);
   console.log("\n── Login credentials ─────────────────────────────────────");
   console.log("  brand    brand@collabridge.com    / password123");
