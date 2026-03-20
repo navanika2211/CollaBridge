@@ -19,9 +19,7 @@ CollaBridge lets brands and creators manage collaborations in one structured pla
 
 ## Live Demo
 
-Deployed at: https://fascinating-bubblegum-34c967.netlify.app/
-collabridge-frontend
- 
+Deployed at: https://fascinating-bubblegum-34c967.netlify.app
 
 - 🎥 **Demo Video:** https://youtu.be/your-video-link
 - 📊 **Slides:** https://docs.google.com/presentation/d/1n7OU8_K_ebRPRseiF6YvSlgdLviCESxPWuSxftvvdOo/edit?usp=sharing
@@ -56,6 +54,30 @@ collabridge-frontend
 - **Auth:** Passport.js with JWT and bcrypt password hashing
 - **Styling:** CSS3 (one CSS file per component)
 - **Linting:** ESLint + Prettier
+
+## How to Use
+
+### As a Brand
+1. Go to the live app and click **"Create one"** to register
+2. Select **Brand** as your role and create your account
+3. From the **Brand Dashboard**, click **"+ New Campaign"** to post a campaign
+4. Fill in the campaign title, platform, budget, deadline, and requirements
+5. Your campaign will appear on the dashboard with an **Open** status
+6. Update the status to **In Review** or **Completed** as the collaboration progresses
+7. Use the **filter** to find campaigns by status or platform
+8. Add **internal notes** to any campaign to track goals or expectations
+
+### As a Creator
+1. Go to the live app and click **"Create one"** to register
+2. Select **Creator** as your role and create your account
+3. From the **Creator Dashboard**, click **"Browse Campaigns"** to discover open brand campaigns
+4. Click **"Apply"** on any campaign you want to work with
+5. Go to **"Collaborations"** and click **"+ New Collab"** to track a deal
+6. Add the brand name, campaign title, platform, due date, and submission link
+7. Mark your submission as **Draft**, **Revision Requested**, or **Final**
+8. Add **personal notes** to remember feedback or posting requirements
+
+---
 
 ## Instructions to Build
 
@@ -174,8 +196,7 @@ CollaBridge-Backend/
 
 ## Screenshots
 
-
-## Login
+### Login
 ![Login](./screenshots/Login.png)
 
 ### Brand Dashboard
