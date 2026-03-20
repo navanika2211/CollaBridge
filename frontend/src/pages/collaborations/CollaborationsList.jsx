@@ -17,7 +17,7 @@ export default function CollaborationsList() {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    setLoading(true)
+    setTimeout(() => setLoading(true), 0)
     const params = { creatorName: user?.name ?? '' }
     if (filter !== 'all') params.status = filter
     if (search.trim()) params.brandName = search.trim()

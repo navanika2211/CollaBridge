@@ -1,15 +1,9 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { AuthContext } from './AuthContext'
+import { useEffect, useState } from 'react'
 import LoadingSpinner from '../components/LoadingSpinner'
 
-const AuthContext = createContext(null)
 
 const BASE_URL = import.meta.env.VITE_API_URL
-
-export function useAuth() {
-  const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth must be used inside AuthProvider')
-  return ctx
-}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
@@ -19,7 +13,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const storedToken = localStorage.getItem('cb_token')
     if (!storedToken) {
-      setLoading(false)
+      setTimeout(() => setLoading(false), 0)
       return
     }
     fetch(`${BASE_URL}/api/auth/me`, {

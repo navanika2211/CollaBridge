@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { loginUser } from '../api/auth'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/useAuth'
 
 const inputClass = 'w-full px-4 py-3 rounded-xl text-sm text-white outline-none transition-all'
 const inputStyle = { backgroundColor: '#1a1a28', border: '1px solid #2a2a38', color: 'white' }

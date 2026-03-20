@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/useAuth'
 
 /**
  * Renders children only if the logged-in user's role matches `allowedRole`.
