@@ -21,7 +21,7 @@ CollaBridge lets brands and creators manage collaborations in one structured pla
 
 Deployed at: https://fascinating-bubblegum-34c967.netlify.app
 
-- 🎥 **Demo Video:** https://youtu.be/your-video-link
+- 🎥 **Demo Video:** https://youtu.be/QC6RTnjJs0c
 - 📊 **Slides:** https://docs.google.com/presentation/d/1n7OU8_K_ebRPRseiF6YvSlgdLviCESxPWuSxftvvdOo/edit?usp=sharing
 - 🖥️ **Frontend Repo:** https://github.com/CODE-BLANK01/CollaBridge-Frontend
 - ⚙️ **Backend Repo:** https://github.com/CODE-BLANK01/CollaBridge-Backend
