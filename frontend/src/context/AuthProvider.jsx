@@ -1,60 +1,62 @@
-import { AuthContext } from './AuthContext'
-import { useEffect, useState } from 'react'
-import LoadingSpinner from '../components/LoadingSpinner'
+import { AuthContext } from "./AuthContext";
+import { useEffect, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-
-const BASE_URL = import.meta.env.VITE_API_URL
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [token, setToken] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('cb_token')
+    const storedToken = localStorage.getItem("cb_token");
     if (!storedToken) {
-      setTimeout(() => setLoading(false), 0)
-      return
+      setTimeout(() => setLoading(false), 0);
+      return;
     }
     fetch(`${BASE_URL}/api/auth/me`, {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
-      .then(r => r.json())
-      .then(json => {
+      .then((r) => r.json())
+      .then((json) => {
         if (json.success) {
-          setToken(storedToken)
-          setUser(json.user)
+          setToken(storedToken);
+          setUser(json.user);
         } else {
-          localStorage.removeItem('cb_token')
+          localStorage.removeItem("cb_token");
         }
       })
-      .catch(() => localStorage.removeItem('cb_token'))
-      .finally(() => setLoading(false))
-  }, [])
+      .catch(() => localStorage.removeItem("cb_token"))
+      .finally(() => setLoading(false));
+  }, []);
 
   function login(newToken, newUser) {
-    localStorage.setItem('cb_token', newToken)
-    setToken(newToken)
-    setUser(newUser)
+    localStorage.setItem("cb_token", newToken);
+    setToken(newToken);
+    setUser(newUser);
   }
 
   function logout() {
-    localStorage.removeItem('cb_token')
-    setToken(null)
-    setUser(null)
+    localStorage.removeItem("cb_token");
+    setToken(null);
+    setUser(null);
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0f0f18' }}>
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: "#0f0f18" }}
+      >
         <LoadingSpinner text="Restoring session..." />
       </div>
-    )
+    );
   }
 
   return (
     <AuthContext.Provider value={{ user, token, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
-  )
+  );
 }

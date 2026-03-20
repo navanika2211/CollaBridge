@@ -1,77 +1,77 @@
-import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
-import { getCampaigns } from '../api/campaigns'
-import { createApplication, getApplications } from '../api/applications'
-import PlatformBadge from './PlatformBadge'
-import LoadingSpinner from './LoadingSpinner'
-import './CampaignBrowser.css'
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { getCampaigns } from "../api/campaigns";
+import { createApplication, getApplications } from "../api/applications";
+import PlatformBadge from "./PlatformBadge";
+import LoadingSpinner from "./LoadingSpinner";
+import "./CampaignBrowser.css";
 
 const PLATFORMS = [
-  'All',
-  'Instagram',
-  'TikTok',
-  'YouTube',
-  'Twitter',
-  'LinkedIn',
-  'Facebook',
-  'Pinterest',
-  'Snapchat',
-]
+  "All",
+  "Instagram",
+  "TikTok",
+  "YouTube",
+  "Twitter",
+  "LinkedIn",
+  "Facebook",
+  "Pinterest",
+  "Snapchat",
+];
 
 export default function CampaignBrowser({ creatorName }) {
-  const [campaigns, setCampaigns] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [platform, setPlatform] = useState('All')
-  const [applied, setApplied] = useState({})
-  const [applying, setApplying] = useState({})
-  const [error, setError] = useState('')
+  const [campaigns, setCampaigns] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [platform, setPlatform] = useState("All");
+  const [applied, setApplied] = useState({});
+  const [applying, setApplying] = useState({});
+  const [error, setError] = useState("");
 
   useEffect(() => {
     Promise.all([
-      getCampaigns({ status: 'open' }),
+      getCampaigns({ status: "open" }),
       getApplications({ creatorName }),
     ])
       .then(([fetchedCampaigns, existingApps]) => {
-        setCampaigns(fetchedCampaigns)
-        const alreadyApplied = {}
+        setCampaigns(fetchedCampaigns);
+        const alreadyApplied = {};
         for (const app of existingApps) {
-          alreadyApplied[app.campaignId] = true
+          alreadyApplied[app.campaignId] = true;
         }
-        setApplied(alreadyApplied)
+        setApplied(alreadyApplied);
       })
       .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
-  }, [creatorName])
+      .finally(() => setLoading(false));
+  }, [creatorName]);
 
   async function handleApply(campaign) {
-    setApplying((prev) => ({ ...prev, [campaign._id]: true }))
+    setApplying((prev) => ({ ...prev, [campaign._id]: true }));
     try {
       await createApplication({
         campaignId: campaign._id,
         campaignTitle: campaign.campaignTitle,
         brandName: campaign.brandName,
         creatorName,
-      })
-      setApplied((prev) => ({ ...prev, [campaign._id]: true }))
+      });
+      setApplied((prev) => ({ ...prev, [campaign._id]: true }));
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     } finally {
-      setApplying((prev) => ({ ...prev, [campaign._id]: false }))
+      setApplying((prev) => ({ ...prev, [campaign._id]: false }));
     }
   }
 
   const filtered =
-    platform === 'All'
+    platform === "All"
       ? campaigns
-      : campaigns.filter((c) => c.platform === platform)
+      : campaigns.filter((c) => c.platform === platform);
 
-  if (loading) return <LoadingSpinner text="Loading open campaigns..." />
+  if (loading) return <LoadingSpinner text="Loading open campaigns..." />;
 
   return (
     <div className="max-w-6xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white mb-1">Browse Campaigns</h1>
-        <p style={{ color: '#6b6b80' }}>
+        <p style={{ color: "#6b6b80" }}>
           Discover open brand campaigns and apply
         </p>
       </div>
@@ -86,15 +86,14 @@ export default function CampaignBrowser({ creatorName }) {
             style={
               platform === p
                 ? {
-                    background:
-                      'linear-gradient(135deg, #7c3aed, #ec4899)',
-                    color: 'white',
-                    border: '1px solid transparent',
+                    background: "linear-gradient(135deg, #7c3aed, #ec4899)",
+                    color: "white",
+                    border: "1px solid transparent",
                   }
                 : {
-                    backgroundColor: '#16161f',
-                    color: '#6b6b80',
-                    border: '1px solid #2a2a38',
+                    backgroundColor: "#16161f",
+                    color: "#6b6b80",
+                    border: "1px solid #2a2a38",
                   }
             }
           >
@@ -107,9 +106,9 @@ export default function CampaignBrowser({ creatorName }) {
         <div
           className="mb-5 px-4 py-3 rounded-xl text-sm"
           style={{
-            backgroundColor: 'rgba(239,68,68,0.1)',
-            color: '#f87171',
-            border: '1px solid rgba(239,68,68,0.2)',
+            backgroundColor: "rgba(239,68,68,0.1)",
+            color: "#f87171",
+            border: "1px solid rgba(239,68,68,0.2)",
           }}
         >
           {error}
@@ -121,13 +120,13 @@ export default function CampaignBrowser({ creatorName }) {
           <div
             key={c._id}
             className="rounded-2xl p-5 flex flex-col gap-3"
-            style={{ backgroundColor: '#16161f', border: '1px solid #2a2a38' }}
+            style={{ backgroundColor: "#16161f", border: "1px solid #2a2a38" }}
           >
             <div>
               <p className="text-sm font-semibold text-white leading-snug">
                 {c.campaignTitle}
               </p>
-              <p className="text-xs mt-1" style={{ color: '#6b6b80' }}>
+              <p className="text-xs mt-1" style={{ color: "#6b6b80" }}>
                 {c.brandName}
               </p>
             </div>
@@ -138,9 +137,9 @@ export default function CampaignBrowser({ creatorName }) {
                 <span
                   className="text-xs px-2 py-0.5 rounded-md font-medium"
                   style={{
-                    backgroundColor: 'rgba(16,185,129,0.1)',
-                    color: '#34d399',
-                    border: '1px solid rgba(16,185,129,0.2)',
+                    backgroundColor: "rgba(16,185,129,0.1)",
+                    color: "#34d399",
+                    border: "1px solid rgba(16,185,129,0.2)",
                   }}
                 >
                   ${c.budget.toLocaleString()}
@@ -151,19 +150,19 @@ export default function CampaignBrowser({ creatorName }) {
             {c.description && (
               <p
                 className="text-xs leading-relaxed campaign-browser__desc"
-                style={{ color: '#9ca3af' }}
+                style={{ color: "#9ca3af" }}
               >
                 {c.description}
               </p>
             )}
 
             {c.deadline && (
-              <p className="text-xs" style={{ color: '#6b6b80' }}>
-                Deadline:{' '}
-                {new Date(c.deadline).toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric',
+              <p className="text-xs" style={{ color: "#6b6b80" }}>
+                Deadline:{" "}
+                {new Date(c.deadline).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
                 })}
               </p>
             )}
@@ -176,24 +175,24 @@ export default function CampaignBrowser({ creatorName }) {
               style={
                 applied[c._id]
                   ? {
-                      backgroundColor: 'rgba(16,185,129,0.15)',
-                      color: '#34d399',
-                      border: '1px solid rgba(16,185,129,0.3)',
-                      cursor: 'default',
+                      backgroundColor: "rgba(16,185,129,0.15)",
+                      color: "#34d399",
+                      border: "1px solid rgba(16,185,129,0.3)",
+                      cursor: "default",
                     }
                   : {
                       background: applying[c._id]
-                        ? 'rgba(124,58,237,0.4)'
-                        : 'linear-gradient(135deg, #7c3aed, #ec4899)',
+                        ? "rgba(124,58,237,0.4)"
+                        : "linear-gradient(135deg, #7c3aed, #ec4899)",
                       opacity: applying[c._id] ? 0.7 : 1,
                     }
               }
             >
               {applied[c._id]
-                ? 'Applied ✓'
+                ? "Applied ✓"
                 : applying[c._id]
-                  ? 'Applying...'
-                  : 'Apply'}
+                  ? "Applying..."
+                  : "Apply"}
             </button>
           </div>
         ))}
@@ -201,16 +200,16 @@ export default function CampaignBrowser({ creatorName }) {
         {filtered.length === 0 && (
           <p
             className="text-center py-16 text-sm"
-            style={{ color: '#6b6b80', gridColumn: '1 / -1' }}
+            style={{ color: "#6b6b80", gridColumn: "1 / -1" }}
           >
             No open campaigns for this platform right now.
           </p>
         )}
       </div>
     </div>
-  )
+  );
 }
 
 CampaignBrowser.propTypes = {
   creatorName: PropTypes.string.isRequired,
-}
+};
