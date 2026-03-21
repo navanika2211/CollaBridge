@@ -33,10 +33,7 @@ export function createCampaignDoc(data) {
     campaignTitle: data.campaignTitle.trim(),
     description: data.description?.trim() || null,
     platform: data.platform.trim(),
-    budget:
-      data.budget !== undefined && data.budget !== null
-        ? Number(data.budget)
-        : null,
+    budget: data.budget !== undefined && data.budget !== null ? Number(data.budget) : null,
     deadline: data.deadline ? new Date(data.deadline) : null,
     requirements: data.requirements?.trim() || null,
     status: data.status || "open",
@@ -72,8 +69,7 @@ export function buildUpdateDoc(data) {
     } else if (field === "budget") {
       updates[field] = Number(data[field]);
     } else {
-      updates[field] =
-        typeof data[field] === "string" ? data[field].trim() : data[field];
+      updates[field] = typeof data[field] === "string" ? data[field].trim() : data[field];
     }
   }
 
@@ -98,19 +94,11 @@ export function validate(data, isUpdate = false) {
     errors.push(`status must be one of: ${VALID_STATUSES.join(", ")}`);
   }
 
-  if (
-    data.deadline !== undefined &&
-    data.deadline !== null &&
-    isNaN(Date.parse(data.deadline))
-  ) {
+  if (data.deadline !== undefined && data.deadline !== null && isNaN(Date.parse(data.deadline))) {
     errors.push("deadline must be a valid date string");
   }
 
-  if (
-    data.budget !== undefined &&
-    data.budget !== null &&
-    isNaN(Number(data.budget))
-  ) {
+  if (data.budget !== undefined && data.budget !== null && isNaN(Number(data.budget))) {
     errors.push("budget must be a number");
   }
 
@@ -125,9 +113,7 @@ export function buildFilter(query = {}) {
   const filter = {};
   if (query.status) filter.status = query.status;
   if (query.platform) filter.platform = query.platform;
-  if (query.brandName)
-    filter.brandName = { $regex: query.brandName, $options: "i" };
-  if (query.campaignTitle)
-    filter.campaignTitle = { $regex: query.campaignTitle, $options: "i" };
+  if (query.brandName) filter.brandName = { $regex: query.brandName, $options: "i" };
+  if (query.campaignTitle) filter.campaignTitle = { $regex: query.campaignTitle, $options: "i" };
   return filter;
 }

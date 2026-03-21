@@ -64,8 +64,7 @@ export function buildUpdateDoc(data) {
     if (field === "dueDate") {
       updates[field] = new Date(data[field]);
     } else {
-      updates[field] =
-        typeof data[field] === "string" ? data[field].trim() : data[field];
+      updates[field] = typeof data[field] === "string" ? data[field].trim() : data[field];
     }
   }
 
@@ -91,11 +90,7 @@ export function validate(data, isUpdate = false) {
     errors.push(`status must be one of: ${VALID_STATUSES.join(", ")}`);
   }
 
-  if (
-    data.dueDate !== undefined &&
-    data.dueDate !== null &&
-    isNaN(Date.parse(data.dueDate))
-  ) {
+  if (data.dueDate !== undefined && data.dueDate !== null && isNaN(Date.parse(data.dueDate))) {
     errors.push("dueDate must be a valid date string");
   }
 
@@ -110,9 +105,7 @@ export function buildFilter(query = {}) {
   const filter = {};
   if (query.status) filter.status = query.status;
   if (query.platform) filter.platform = query.platform;
-  if (query.brandName)
-    filter.brandName = { $regex: query.brandName, $options: "i" };
-  if (query.creatorName)
-    filter.creatorName = { $regex: query.creatorName, $options: "i" };
+  if (query.brandName) filter.brandName = { $regex: query.brandName, $options: "i" };
+  if (query.creatorName) filter.creatorName = { $regex: query.creatorName, $options: "i" };
   return filter;
 }
