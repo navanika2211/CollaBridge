@@ -1,13 +1,9 @@
 @import "tailwindcss";
 
-html,
-body {
+html, body {
   background-color: #0f0f18;
   color: white;
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -15,6 +11,10 @@ body {
   width: 100%;
   min-height: 100svh;
   text-align: left;
+}
+
+button, [role="button"], a {
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
