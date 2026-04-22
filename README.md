@@ -194,7 +194,7 @@ CollaBridge-Backend/
 ├── index.js            # Server entry point
 └── seed.js             # Database seeder
 ```
-
+add Passport.js
 ## Screenshots
 
 ### Login
